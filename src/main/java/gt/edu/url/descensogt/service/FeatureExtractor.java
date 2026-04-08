@@ -46,7 +46,9 @@ public class FeatureExtractor {
         f.setDiffRate(r.getDiff()/ jj); // diferencial puede ser negativo; el bin() lo maneja con clamp
 
         // Normalizar la etiqueta a mayúsculas para evitar problemas con "Si"/"SI"/"si"
-        f.setLabel(r.getDescendio().trim().toUpperCase());
+        // En predict, descendio puede llegar null; se deja vacío (no afecta la predicción)
+        String desc = r.getDescendio();
+        f.setLabel(desc != null ? desc.trim().toUpperCase() : "");
 
         return f;
     }
